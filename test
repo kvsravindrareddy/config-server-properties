@@ -1,0 +1,21 @@
+@Bean
+	public io.opentracing.Tracer jaegerTracer() {
+		return new Configuration("test-spring-boot", new Configuration.SamplerConfiguration(ProbabilisticSampler.TYPE, 1),
+				new Configuration.ReporterConfiguration())
+				.getTracer();
+	}
+<dependency>
+			<groupId>com.uber.jaeger</groupId>
+			<artifactId>jaeger-core</artifactId>
+			<version>0.18.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.opentracing.brave</groupId>
+			<artifactId>brave-opentracing</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.opentracing.contrib</groupId>
+			<artifactId>opentracing-spring-web-starter</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+
