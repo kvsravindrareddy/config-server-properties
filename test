@@ -1,21 +1,17 @@
-@Bean
-	public io.opentracing.Tracer jaegerTracer() {
-		return new Configuration("test-spring-boot", new Configuration.SamplerConfiguration(ProbabilisticSampler.TYPE, 1),
-				new Configuration.ReporterConfiguration())
-				.getTracer();
-	}
-<dependency>
-			<groupId>com.uber.jaeger</groupId>
-			<artifactId>jaeger-core</artifactId>
-			<version>0.18.0</version>
-		</dependency>
-		<dependency>
-			<groupId>io.opentracing.brave</groupId>
-			<artifactId>brave-opentracing</artifactId>
-		</dependency>
 		<dependency>
 			<groupId>io.opentracing.contrib</groupId>
-			<artifactId>opentracing-spring-web-starter</artifactId>
-			<version>3.0.0</version>
+			<artifactId>opentracing-spring-jaeger-web-starter</artifactId>
+			<version>2.0.3</version>
 		</dependency>
+		
+		opentracing.jaeger.enabled=true
+		#opentracing.jaeger.udp-sender.host=localhost
+		#opentracing.jaeger.udp-sender.port=6831
 
+		opentracing.jaeger.http-sender.url = http://localhost:6831/api/traces
+		
+		@Bean
+		public io.opentracing.Tracer jaegerTracer() {
+			return new Configuration("veera-spring-boot")
+					.getTracer();
+		}
